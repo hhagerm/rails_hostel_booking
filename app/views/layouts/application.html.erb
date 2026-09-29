@@ -24,6 +24,10 @@
   </head>
 
   <body>
+    <ul>
+      <li><%= link_to "Rooms", root_path %></li>
+      <li><%= link_to "Create Room", new_room_path %></li>
+    </ul>
     <%= yield %>
   </body>
 </html>
