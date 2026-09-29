@@ -1,10 +1,148 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+:root {
+  --accent: #2f6f5e;
+  --danger: #b3261e;
+  --text: #222;
+  --muted: #666;
+  --border: #ddd;
+  --bg: #f7f7f5;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+h1 { margin: 0 0 1rem; }
+h2 { margin: 2rem 0 1rem; }
+.muted { color: var(--muted); }
+
+/* Header, navigation and flash messages */
+header { display: flex; flex-direction: column; }
+
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0 0 1rem;
+  margin: 0 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+nav a { font-weight: 600; text-decoration: none; }
+
+.notice, .alert { padding: 0.75rem 1rem; border-radius: 6px; }
+.notice { background: #e6f4ea; color: #1e6b34; }
+.alert  { background: #fdecea; color: #a12622; }
+
+/* Page header: title on the left, main action on the right */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.page-header h1, .page-header p { margin: 0; }
+
+/* Cards */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.card h2, .card h3 { margin: 0 0 0.25rem; font-size: 1.2rem; }
+.card p { margin: 0.25rem 0; }
+
+/* Lists of cards in a responsive grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+/* Buttons */
+.button, input[type="submit"], button {
+  display: inline-block;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.button:hover, input[type="submit"]:hover, button:hover { opacity: 0.9; }
+
+.button-secondary { background: white; color: var(--accent); }
+.button-danger    { background: var(--danger); border-color: var(--danger); }
+.button-disabled {
+  background: #ccc;
+  border-color: #ccc;
+  color: #777;
+  cursor: not-allowed;
+}
+.button-disabled:hover { opacity: 1; }
+
+/* Buttons stacked at the bottom of a card, full width */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+.actions .button { display: block; }
+
+/* Buttons in a row below content */
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+form.button_to { margin: 0; }
+
+/* Forms */
+form div { margin-bottom: 1rem; }
+label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+input, select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font: inherit;
+}
+.form-card { max-width: 480px; }
+.form-card input:not([type="submit"]), .form-card select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.errors {
+  background: #fdecea;
+  color: #a12622;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.errors h2 { font-size: 1rem; margin: 0 0 0.5rem; }
+
+/* Search form on the rooms page: fields in one row */
+.search form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+.search form div { margin-bottom: 0; }

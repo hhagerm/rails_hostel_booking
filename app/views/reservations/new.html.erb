@@ -2,11 +2,10 @@
 
 <h1>New reservation</h1>
 
-<%= render "form", reservation: @reservation %>
+<div class="card form-card">
+  <%= render "form", reservation: @reservation %>
+</div>
 
-<br>
-
-<div>
-  
-  <%= link_to "Back", root_path(start_date: @reservation.start_date, end_date: @reservation.end_date) %>
+<div class="actions-row">
+  <%= link_to "Back", root_path(start_date: @reservation.start_date, end_date: @reservation.end_date), class: "button button-secondary" %>
 </div>

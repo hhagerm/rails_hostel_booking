@@ -1,6 +1,6 @@
 <%= form_with(model: room) do |form| %>
   <% if room.errors.any? %>
-    <div style="color: red">
+    <div>
       <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
 
       <ul>

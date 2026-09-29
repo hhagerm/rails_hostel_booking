@@ -1,15 +1,10 @@
-
 <% content_for :title, "Reservations" %>
 
-<h1>Reservations</h1>
-
-<div id="reservations">
-  <% @reservations.each do |reservation| %>
-    <%= render reservation %>
-    <p>
-      <%= link_to "Show this reservation", reservation %>
-    </p>
-  <% end %>
+<div class="page-header">
+  <h1>Reservations</h1>
+  <%= link_to "New reservation", new_reservation_path, class: "button" %>
 </div>
 
-<%= link_to "New reservation", new_reservation_path %>
+<div id="reservations" class="card-grid">
+  <%= render @reservations %>
+</div>

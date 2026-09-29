@@ -1,32 +1,38 @@
 <% content_for :title, "Rooms" %>
 
-<%= form_with url: root_path, method: :get do |f| %>
-  <%= f.label :start_date, "Check-in" %>
-  <%= f.date_field :start_date, value: params[:start_date] %>
+<h2>Pick your dates and book a room</h2>
 
-  <%= f.label :end_date, "Check-out" %>
-  <%= f.date_field :end_date, value: params[:end_date] %>
-
-  <%= f.submit "Find free beds" %>
-<% end %>
-
-<h1>Rooms</h1>
-
-<div id="rooms">
-  <% @rooms.each do |room| %>
-    <%= render room %>
-    
-    <% if @start_date && @end_date %>
-    <p>
-      <%= link_to "Book", new_reservation_path(room_id: room.id, start_date: @start_date, end_date: @end_date) %>
-    </p>
-    <% end %>
-
-    <p>
-      <%= link_to "Show reservations", room_path(room) %>
-    </p>
-    
+<div class="search">
+  <%= form_with url: root_path, method: :get do |f| %>
+    <div>
+      <%= f.label :start_date, "Check-in" %>
+      <%= f.date_field :start_date, value: params[:start_date] %>
+    </div>
+    <div>
+      <%= f.label :end_date, "Check-out" %>
+      <%= f.date_field :end_date, value: params[:end_date] %>
+    </div>
+    <div>
+      <%= f.submit "Find free beds" %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New room", new_room_path %>
+<h2>Rooms</h2>
+
+<div id="rooms" class="card-grid">
+  <% @rooms.each do |room| %>
+    <div class="card">
+      <%= render room %>
+
+      <div class="actions">
+        <% if @start_date && @end_date %>
+          <%= link_to "Book", new_reservation_path(room_id: room.id, start_date: @start_date, end_date: @end_date), class: "button" %>
+        <% else %>
+          <span class="button button-disabled" aria-disabled="true" title="Choose check-in and check-out dates first">Book</span>
+        <% end %>
+        <%= link_to "Show reservations", room_path(room), class: "button button-secondary" %>
+    </div>
+    </div>
+  <% end %>
+</div>

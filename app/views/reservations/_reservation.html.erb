@@ -1,24 +1,8 @@
-<div id="<%= dom_id reservation %>">
-  <div>
-    <strong>Room:</strong>
-    <%= reservation.room.name %>
-    <br>
-    <%= reservation.room_id %>
-  </div>
-
-  <div>
-    <strong>Guest name:</strong>
-    <%= reservation.guest_name %>
-  </div>
-
-  <div>
-    <strong>Start date:</strong>
-    <%= reservation.start_date %>
-  </div>
-
-  <div>
-    <strong>End date:</strong>
-    <%= reservation.end_date %>
-  </div>
-
+<div id="<%= dom_id reservation %>" class="card">
+  <h3><%= link_to reservation.guest_name, reservation %></h3>
+  <p class="muted"><%= link_to reservation.room.name, reservation.room %></p>
+  <p>
+    <%= reservation.start_date.strftime("%-d %b %Y") %> → <%= reservation.end_date.strftime("%-d %b %Y") %>
+  </p>
+  <p class="muted"><%= pluralize(reservation.nights, "night") %></p>
 </div>
