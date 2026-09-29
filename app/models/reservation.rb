@@ -39,6 +39,4 @@ class Reservation < ApplicationRecord
       errors.add(:base, "No free bed for the selected dates")
     end
   end
-
-
 end
