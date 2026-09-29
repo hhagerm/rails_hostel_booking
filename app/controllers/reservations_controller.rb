@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
+  before_action :set_rooms, only: %i[ new edit create update ]
 
   # GET /reservations or /reservations.json
   def index
@@ -66,5 +67,9 @@ class ReservationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reservation_params
       params.expect(reservation: [ :room_id, :guest_name, :start_date, :end_date ])
+    end
+
+    def set_rooms
+      @rooms = Room.order(:name)
     end
 end

@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :room_id, style: "display: block" %>
-    <%= form.text_field :room_id %>
+    <%= form.collection_select :room_id, @rooms, :id, :name, prompt: "Select a room" %>
   </div>
 
   <div>
