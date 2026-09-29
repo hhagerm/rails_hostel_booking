@@ -7,6 +7,10 @@ class Reservation < ApplicationRecord
   validate :start_date_not_in_past
   validate :room_has_free_bed
 
+  def nights
+    (end_date - start_date).to_i
+  end
+
   private
 
   def end_date_after_start_date
@@ -35,4 +39,6 @@ class Reservation < ApplicationRecord
       errors.add(:base, "No free bed for the selected dates")
     end
   end
+
+
 end
