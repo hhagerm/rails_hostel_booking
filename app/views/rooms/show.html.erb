@@ -8,3 +8,13 @@
 
   <%= button_to "Destroy this room", @room, method: :delete %>
 </div>
+
+<h2>Reservations</h2>
+
+<div id="reservations">
+  <% if @reservations.any? %>
+    <%= render @reservations %>
+  <% else %>
+    <p>No reservations yet.</p>
+  <% end %>
+</div>
