@@ -13,7 +13,11 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @reservation = Reservation.new
+    @reservation = Reservation.new(
+      room_id: params[:room_id],
+      start_date: params[:start_date],
+      end_date: params[:end_date]
+    )
   end
 
   # GET /reservations/1/edit
