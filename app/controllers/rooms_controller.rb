@@ -15,6 +15,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @reservations = @room.reservations.order(:start_date)
   end
 
   # GET /rooms/new

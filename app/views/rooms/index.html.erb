@@ -23,6 +23,10 @@
       <%= link_to "Book", new_reservation_path(room_id: room.id, start_date: @start_date, end_date: @end_date) %>
     </p>
     <% end %>
+
+    <p>
+      <%= link_to "Show reservations", room_path(room) %>
+    </p>
     
   <% end %>
 </div>
