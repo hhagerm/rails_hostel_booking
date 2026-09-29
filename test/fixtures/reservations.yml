@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  room: one
-  guest_name: MyString
-  start_date: 2026-09-26
-  end_date: 2026-09-26
+guest_1:
+  room: dorm
+  guest_name: guest_1
+  start_date: <%= Date.current + 10 %>
+  end_date: <%= Date.current + 12 %>
 
-two:
-  room: two
-  guest_name: MyString
-  start_date: 2026-09-26
-  end_date: 2026-09-26
+guest_2:
+  room: private_room
+  guest_name: guest_2
+  start_date: <%= Date.current + 10 %>
+  end_date: <%= Date.current + 11 %>
