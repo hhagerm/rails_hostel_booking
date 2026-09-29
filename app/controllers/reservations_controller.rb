@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.order(:start_date)
+    @reservations = Reservation.includes(:room).order(:start_date)
   end
 
   # GET /reservations/1 or /reservations/1.json
