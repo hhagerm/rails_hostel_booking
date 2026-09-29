@@ -24,13 +24,21 @@
   </head>
 
   <body>
-    <ul>
-      <li><%= link_to "Rooms", root_path %></li>
-      <li><%= link_to "Create Room", new_room_path %></li>
-    </ul>
+    <header>
+      <nav>
+        <ul>
+          <li><%= link_to "Rooms", root_path %></li>
+          <li><%= link_to "Create Room", new_room_path %></li>
+          <li><%= link_to "All Reservations", reservations_path %></li>
+          <li><%= link_to "Create Reservation", new_reservation_path %></li>
+        </ul>
+      </nav>
 
-    <% if notice %><p class="notice"><%= notice %></p><% end %>
-    <% if alert %><p class="alert"><%= alert %></p><% end %>
+      <% if notice %><p class="notice"><%= notice %></p><% end %>
+      <% if alert %><p class="alert"><%= alert %></p><% end %>
+    </header>
+   
+
     <%= yield %>
   </body>
 </html>

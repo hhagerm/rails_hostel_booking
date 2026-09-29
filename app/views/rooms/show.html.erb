@@ -1,19 +1,25 @@
+<% content_for :title, @room.name %>
 
-<%= render @room %>
+<div class="page-header">
+  <div>
+    <h1><%= @room.name %></h1>
+    <p class="muted"><%= pluralize(@room.capacity, "bed") %></p>
+  </div>
+</div>
 
-<div>
-  <%= link_to "Edit this room", edit_room_path(@room) %> |
-  <%= link_to "Back to rooms", rooms_path %>
-
-  <%= button_to "Destroy this room", @room, method: :delete %>
+<div class="actions-row">
+  <%= link_to "Edit room", edit_room_path(@room), class: "button" %>
+  <%= button_to "Delete room", @room, method: :delete, class: "button button-danger",
+        form: { data: { turbo_confirm: "Delete this room?" } } %>
+  <%= link_to "Back to rooms", rooms_path, class: "button button-secondary" %>
 </div>
 
 <h2>Reservations</h2>
 
-<div id="reservations">
-  <% if @reservations.any? %>
+<% if @reservations.any? %>
+  <div id="reservations" class="card-grid">
     <%= render @reservations %>
-  <% else %>
-    <p>No reservations yet.</p>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <p class="muted">No reservations yet.</p>
+<% end %>
