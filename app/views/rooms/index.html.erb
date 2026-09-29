@@ -2,6 +2,16 @@
 
 <% content_for :title, "Rooms" %>
 
+<%= form_with url: root_path, method: :get do |f| %>
+  <%= f.label :start_date, "Check-in" %>
+  <%= f.date_field :start_date, value: params[:start_date] %>
+
+  <%= f.label :end_date, "Check-out" %>
+  <%= f.date_field :end_date, value: params[:end_date] %>
+
+  <%= f.submit "Find free beds" %>
+<% end %>
+
 <h1>Rooms</h1>
 
 <div id="rooms">

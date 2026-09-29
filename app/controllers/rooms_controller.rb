@@ -3,7 +3,14 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    @start_date = parse_date(params[:start_date])
+    @end_date = parse_date(params[:end_date])
+
+    if @start_date && @end_date && @start_date < @end_date
+      @rooms = free_rooms(@start_date, @end_date)
+    else
+      @rooms = Room.order(:name)
+    end
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -66,5 +73,19 @@ class RoomsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def room_params
       params.expect(room: [ :name, :capacity ])
+    end
+
+    def parse_date(value)
+      return nil if value.blank?
+
+      begin
+        Date.parse(value)
+      rescue
+        nil
+      end
+    end
+
+    def free_rooms(start_date, end_date)
+      Room.order(:name).select { |room| room.free_bed_between?(start_date, end_date) }
     end
 end
