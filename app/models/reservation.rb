@@ -31,20 +31,8 @@ class Reservation < ApplicationRecord
     return if room.blank? || start_date.blank? || end_date.blank?
 
     room.lock!
-
-    overlapping = Reservation.where(room_id: room_id)
-      .where("start_date < ? AND ? < end_date", end_date, start_date)
-      .where.not(id: id)
-      .lock
-
-    guests_per_night = (start_date...end_date).map do |night|
-      overlapping.count do |overlap|
-        overlap["start_date"] <= night && night < overlap["end_date"]
-      end
-    end
-
-    if guests_per_night.any? { |guests| guests >= room.capacity }
-      errors.add(:base, "no free bed for the selected dates")
+    unless room.free_bed_between?(start_date, end_date, except_id: id, lock: true)
+      errors.add(:base, "No free bed for the selected dates")
     end
   end
 end
