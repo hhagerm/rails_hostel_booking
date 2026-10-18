@@ -47,7 +47,6 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy room with reservations" do
-    puts "deleting #{@room.name}, reservations: #{@room.reservations.count}"
     assert_no_difference("Room.count") do
       delete room_url(@room)
     end
