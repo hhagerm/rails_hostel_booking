@@ -12,6 +12,11 @@
       <%= f.label :end_date, "Check-out" %>
       <%= f.date_field :end_date, value: params[:end_date] %>
     </div>
+
+    <div>
+      <%= f.label :guests, "Number of guests" %>
+      <%= f.number_field :guests, value: params[:guests] || 1, min: 1 %>
+    </div>
     <div>
       <%= f.submit "Find free beds" %>
     </div>
@@ -27,7 +32,7 @@
 
       <div class="actions">
         <% if @start_date && @end_date %>
-          <%= link_to "Book", new_reservation_path(room_id: room.id, start_date: @start_date, end_date: @end_date), class: "button" %>
+          <%= link_to "Book", new_reservation_path(room_id: room.id, start_date: @start_date, end_date: @end_date, guests: @guests), class: "button" %>
         <% else %>
           <span class="button button-disabled" aria-disabled="true" title="Choose check-in and check-out dates first">Book</span>
         <% end %>

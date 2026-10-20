@@ -5,18 +5,21 @@ class RoomsController < ApplicationController
   def index
     @start_date = parse_date(params[:start_date])
     @end_date = parse_date(params[:end_date])
+    @guests = params[:guests].to_i
     @rooms = Room.order(:name)
 
     return if params[:start_date].blank? && params[:end_date].blank?
 
     if @start_date.nil? || @end_date.nil?
-      flash.now[:alert] = "One of the dates is missing."
+      flash.now[:alert] = "Please enter a valid check-in and check-out date."
     elsif @end_date <= @start_date
-      flash.now[:alert] = "Your end date has to be after your start date."
+      flash.now[:alert] = "Your check-in has to be before your check-out."
+    elsif @guests < 1
+      flash.now[:alert] = "Number of guests has to be a positive number"
     elsif @start_date < Date.current
-      flash.now[:alert] = "Your start date cannot be in the past."
+      flash.now[:alert] = "Your check-in cannot be in the past."
     else
-      @rooms = free_rooms(@start_date, @end_date)
+      @rooms = free_rooms(@start_date, @end_date, @guests)
     end
   end
 
@@ -92,7 +95,7 @@ class RoomsController < ApplicationController
       end
     end
 
-    def free_rooms(start_date, end_date)
-      Room.order(:name).select { |room| room.free_bed_between?(start_date, end_date) }
+    def free_rooms(start_date, end_date, guests)
+      Room.order(:name).select { |room| room.free_bed_between?(start_date, end_date, guests) }
     end
 end

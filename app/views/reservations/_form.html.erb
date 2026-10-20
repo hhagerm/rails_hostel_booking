@@ -32,6 +32,11 @@
   </div>
 
   <div>
+    <%= form.label :guests, "Number of guests" %>
+    <%= form.number_field :guests, min: 1 %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

@@ -3,6 +3,7 @@ class Reservation < ApplicationRecord
 
   validates :guest_name, :start_date, :end_date, presence: true
   validates :guest_name, length: { maximum: 100 }
+  validates :guests, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :end_date_after_start_date
   validate :start_date_not_in_past
   validate :room_has_free_bed
@@ -32,10 +33,10 @@ class Reservation < ApplicationRecord
   end
 
   def room_has_free_bed
-    return if room.blank? || start_date.blank? || end_date.blank?
+    return if room.blank? || start_date.blank? || end_date.blank? || guests.blank?
 
     room.lock!
-    unless room.free_bed_between?(start_date, end_date, except_id: id, lock: true)
+    unless room.free_bed_between?(start_date, end_date, guests, except_id: id, lock: true)
       errors.add(:base, "No free bed for the selected dates")
     end
   end

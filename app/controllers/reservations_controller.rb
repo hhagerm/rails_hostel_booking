@@ -16,7 +16,8 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(
       room_id: params[:room_id],
       start_date: params[:start_date],
-      end_date: params[:end_date]
+      end_date: params[:end_date],
+      guests: params[:guests]
     )
   end
 
@@ -70,7 +71,7 @@ class ReservationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reservation_params
-      params.expect(reservation: [ :room_id, :guest_name, :start_date, :end_date ])
+      params.expect(reservation: [ :room_id, :guest_name, :start_date, :end_date, :guests ])
     end
 
     def set_rooms
