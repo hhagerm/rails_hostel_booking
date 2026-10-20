@@ -5,11 +5,18 @@ class RoomsController < ApplicationController
   def index
     @start_date = parse_date(params[:start_date])
     @end_date = parse_date(params[:end_date])
+    @rooms = Room.order(:name)
 
-    if @start_date && @end_date && @start_date < @end_date
-      @rooms = free_rooms(@start_date, @end_date)
+    return if params[:start_date].blank? && params[:end_date].blank?
+
+    if @start_date.nil? || @end_date.nil?
+      flash.now[:alert] = "One of the dates is missing."
+    elsif @end_date <= @start_date
+      flash.now[:alert] = "Your end date has to be after your start date."
+    elsif @start_date < Date.current
+      flash.now[:alert] = "Your start date cannot be in the past."
     else
-      @rooms = Room.order(:name)
+      @rooms = free_rooms(@start_date, @end_date)
     end
   end
 
