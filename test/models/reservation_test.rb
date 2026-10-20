@@ -45,4 +45,17 @@ class ReservationTest < ActiveSupport::TestCase
 
     assert reservation.valid?, reservation.errors.full_messages.to_sentence
   end
+
+  test "should reject a party larger than the remaining beds" do
+    reservation = @room.reservations.new(guest_name: "John", start_date: @d, end_date: @d + 3, guests: 2)
+
+    assert_not reservation.valid?
+    assert_includes reservation.errors[:base], "No free bed for the selected dates"
+  end
+
+  test "should allow a party that exactly fills the room" do
+    reservation = @room.reservations.new(guest_name: "Couple", start_date: @d + 1, end_date: @d + 2, guests: 2)
+
+    assert reservation.valid?, reservation.errors.full_messages.to_sentence
+  end
 end
